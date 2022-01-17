@@ -1,4 +1,4 @@
-package com.training.demo;
+package com.spring.training;
 
 import com.example.consumingwebservice.wsdl.GetCountryResponse;
 import org.springframework.boot.CommandLineRunner;
