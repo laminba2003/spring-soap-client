@@ -20,7 +20,8 @@ public class ApplicationConfiguration {
 
     @Bean
     public CountryClient countryClient(Jaxb2Marshaller marshaller, ClientConfiguration clientConfiguration) {
-        CountryClient client = new CountryClient(clientConfiguration);
+        CountryClient client = new CountryClient();
+        client.setDefaultUri(clientConfiguration.getDefaultUri());
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
         return client;
