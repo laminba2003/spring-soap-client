@@ -1,6 +1,7 @@
 package com.spring.training;
 
 import lombok.AllArgsConstructor;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
@@ -25,6 +26,12 @@ public class ApplicationConfiguration {
         client.setMarshaller(marshaller);
         client.setUnmarshaller(marshaller);
         return client;
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix = "soap")
+    public ClientConfiguration clientConfiguration() {
+        return new ClientConfiguration();
     }
 
 }
