@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PersonController {
 
-    PersonService personService;
+    final PersonService personService;
 
     @GetMapping
     public List<Person> getPersons() {

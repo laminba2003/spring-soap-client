@@ -11,7 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 public class PersonService {
 
-    PersonClient client;
+    final PersonClient client;
 
     public List<Person> getPersons() {
         return client.getPersons();
