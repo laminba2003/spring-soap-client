@@ -7,8 +7,7 @@ import java.util.List;
 public class CountryClient extends AbstractClient {
 
     public List<Country> getCountries() {
-        GetCountriesRequest request = new GetCountriesRequest();
-        GetCountriesResponse response = sendRequest(request, GetCountriesResponse.class);
+        GetCountriesResponse response = sendRequest(new GetCountriesRequest(), GetCountriesResponse.class);
         return response.getCountries();
     }
 

@@ -7,8 +7,7 @@ import java.util.List;
 public class PersonClient extends AbstractClient {
 
     public List<Person> getPersons() {
-        GetPersonsRequest request = new GetPersonsRequest();
-        GetPersonsResponse response = sendRequest(request, GetPersonsResponse.class);
+        GetPersonsResponse response = sendRequest(new GetPersonsRequest(), GetPersonsResponse.class);
         return response.getPersons();
     }
 
