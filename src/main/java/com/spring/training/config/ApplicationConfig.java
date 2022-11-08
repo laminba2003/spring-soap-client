@@ -17,10 +17,8 @@ import java.util.Properties;
 @AllArgsConstructor
 public class ApplicationConfig {
 
-    static final String CONTEXT_PATH = "com.spring.training.model";
-
     @Bean
-    public SoapFaultMappingExceptionResolver exceptionResolver(){
+    public SoapFaultMappingExceptionResolver exceptionResolver() {
         SoapFaultMappingExceptionResolver exceptionResolver = new SoapExceptionResolver();
         SoapFaultDefinition faultDefinition = new SoapFaultDefinition();
         faultDefinition.setFaultCode(SoapFaultDefinition.SERVER);
@@ -35,7 +33,7 @@ public class ApplicationConfig {
     @Bean
     public Jaxb2Marshaller marshaller() {
         Jaxb2Marshaller marshaller = new Jaxb2Marshaller();
-        marshaller.setContextPath(CONTEXT_PATH);
+        marshaller.setContextPath("com.spring.training.model");
         return marshaller;
     }
 

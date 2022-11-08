@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class ClientConfig {
-    private String defaultUri;
+    String defaultUri;
 }
