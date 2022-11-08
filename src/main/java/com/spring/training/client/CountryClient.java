@@ -11,9 +11,9 @@ public class CountryClient extends AbstractClient {
         return response.getCountries();
     }
 
-    public Country getCountry(String country) {
+    public Country getCountry(String name) {
         GetCountryRequest request = new GetCountryRequest();
-        request.setName(country);
+        request.setName(name);
         GetCountryResponse response = sendRequest(request, GetCountryResponse.class);
         return response.getCountry();
     }
