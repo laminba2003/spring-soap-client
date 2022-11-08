@@ -1,0 +1,9 @@
+server:
+  port: 9090
+services:
+  defaultUri: http://localhost:8080/ws
+logging:
+  level:
+    org:
+      springframework:
+        ws: TRACE
