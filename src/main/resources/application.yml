@@ -1,9 +1,15 @@
 server:
   port: 9090
-services:
-  defaultUri: http://localhost:8080/ws
+ws:
+  location: http://localhost:8080/ws
+  security:
+    password:
+      policy: classpath:passwordSecurityPolicy.xml
+    certificate:
+      policy: classpath:certificateSecurityPolicy.xml
+      trustStore: classpath:trustStore.jks
+      password: changeit
+      alias: thinktech
 logging:
   level:
-    org:
-      springframework:
-        ws: TRACE
+    org.springframework.ws: TRACE

@@ -1,10 +1,16 @@
 package com.spring.training.client;
 
+import com.spring.training.config.ClientConfig;
 import com.spring.training.model.*;
+import org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor;
 
 import java.util.List;
 
-public class CountryClient extends AbstractClient {
+public class CountryClient extends AbstractWSClient {
+
+    public CountryClient(ClientConfig clientConfig, XwsSecurityInterceptor securityInterceptor) {
+        super(clientConfig, securityInterceptor);
+    }
 
     public List<Country> getCountries() {
         GetCountriesResponse response = sendRequest(new GetCountriesRequest(), GetCountriesResponse.class);

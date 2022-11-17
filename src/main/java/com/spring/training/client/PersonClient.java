@@ -1,10 +1,16 @@
 package com.spring.training.client;
 
+import com.spring.training.config.ClientConfig;
 import com.spring.training.model.*;
+import org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor;
 
 import java.util.List;
 
-public class PersonClient extends AbstractClient {
+public class PersonClient extends AbstractWSClient {
+
+    public PersonClient(ClientConfig clientConfig, XwsSecurityInterceptor securityInterceptor) {
+        super(clientConfig, securityInterceptor);
+    }
 
     public List<Person> getPersons() {
         GetPersonsResponse response = sendRequest(new GetPersonsRequest(), GetPersonsResponse.class);
