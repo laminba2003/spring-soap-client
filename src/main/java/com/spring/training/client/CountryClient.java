@@ -2,14 +2,14 @@ package com.spring.training.client;
 
 import com.spring.training.config.ClientConfig;
 import com.spring.training.model.*;
-import org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor;
+import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 
 import java.util.List;
 
-public class CountryClient extends AbstractWSClient {
+public class CountryClient extends AbstractWsClient {
 
-    public CountryClient(ClientConfig clientConfig, XwsSecurityInterceptor securityInterceptor) {
-        super(clientConfig, securityInterceptor);
+    public CountryClient(ClientConfig clientConfig, ClientInterceptor[] interceptors) {
+        super(clientConfig, interceptors);
     }
 
     public List<Country> getCountries() {
@@ -42,7 +42,7 @@ public class CountryClient extends AbstractWSClient {
         DeleteCountryRequest request = new DeleteCountryRequest();
         Country country = new Country();
         country.setName(name);
-        sendRequest(request, DeleteCountryResponse.class);
+        sendRequest(request);
     }
 
 }

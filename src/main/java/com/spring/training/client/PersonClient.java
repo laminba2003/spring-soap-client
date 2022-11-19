@@ -2,14 +2,14 @@ package com.spring.training.client;
 
 import com.spring.training.config.ClientConfig;
 import com.spring.training.model.*;
-import org.springframework.ws.soap.security.xwss.XwsSecurityInterceptor;
+import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 
 import java.util.List;
 
-public class PersonClient extends AbstractWSClient {
+public class PersonClient extends AbstractWsClient {
 
-    public PersonClient(ClientConfig clientConfig, XwsSecurityInterceptor securityInterceptor) {
-        super(clientConfig, securityInterceptor);
+    public PersonClient(ClientConfig clientConfig, ClientInterceptor[] interceptors) {
+        super(clientConfig, interceptors);
     }
 
     public List<Person> getPersons() {
@@ -42,7 +42,7 @@ public class PersonClient extends AbstractWSClient {
     public void deletePerson(Long id) {
         DeletePersonRequest request = new DeletePersonRequest();
         request.setId(id);
-        sendRequest(request, DeletePersonResponse.class);
+        sendRequest(request);
     }
 
 }
