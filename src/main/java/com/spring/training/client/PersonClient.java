@@ -6,6 +6,8 @@ import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 
 import java.util.List;
 
+import static com.spring.training.client.SoapActions.*;
+
 public class PersonClient extends AbstractWsClient {
 
     public PersonClient(ClientConfig clientConfig, ClientInterceptor[] interceptors) {
@@ -13,21 +15,21 @@ public class PersonClient extends AbstractWsClient {
     }
 
     public List<Person> getPersons() {
-        GetPersonsResponse response = sendRequest(new GetPersonsRequest(), GetPersonsResponse.class);
+        GetPersonsResponse response = sendRequest(new GetPersonsRequest(), GET_PERSONS, GetPersonsResponse.class);
         return response.getPersons();
     }
 
     public Person getPerson(Long id) {
         GetPersonRequest request = new GetPersonRequest();
         request.setId(id);
-        GetPersonResponse response = sendRequest(request, GetPersonResponse.class);
+        GetPersonResponse response = sendRequest(request, GET_PERSON, GetPersonResponse.class);
         return response.getPerson();
     }
 
     public Person createPerson(Person person) {
         CreatePersonRequest request = new CreatePersonRequest();
         request.setPerson(person);
-        CreatePersonResponse response = sendRequest(request, CreatePersonResponse.class);
+        CreatePersonResponse response = sendRequest(request, CREATE_PERSON, CreatePersonResponse.class);
         return response.getPerson();
     }
 
@@ -35,14 +37,14 @@ public class PersonClient extends AbstractWsClient {
         person.setId(id);
         UpdatePersonRequest request = new UpdatePersonRequest();
         request.setPerson(person);
-        UpdatePersonResponse response = sendRequest(request, UpdatePersonResponse.class);
+        UpdatePersonResponse response = sendRequest(request, UPDATE_PERSON, UpdatePersonResponse.class);
         return response.getPerson();
     }
 
     public void deletePerson(Long id) {
         DeletePersonRequest request = new DeletePersonRequest();
         request.setId(id);
-        sendRequest(request);
+        sendRequest(request, DELETE_PERSON);
     }
 
 }
