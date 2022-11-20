@@ -18,15 +18,11 @@ public abstract class AbstractWsClient extends WebServiceGatewaySupport {
     }
 
     public <T> void sendRequest(T request, String action) {
-        getWebServiceTemplate().marshalSendAndReceive(request, message -> {
-            ((SoapMessage) message).setSoapAction(action);
-        });
+        getWebServiceTemplate().marshalSendAndReceive(request, message -> ((SoapMessage) message).setSoapAction(action));
     }
 
     public <T, U> U sendRequest(T request, String action, Class<U> clazz) {
-        return clazz.cast(getWebServiceTemplate().marshalSendAndReceive(request, message -> {
-            ((SoapMessage) message).setSoapAction(action);
-        }));
+        return clazz.cast(getWebServiceTemplate().marshalSendAndReceive(request, message -> ((SoapMessage) message).setSoapAction(action)));
     }
 
 }

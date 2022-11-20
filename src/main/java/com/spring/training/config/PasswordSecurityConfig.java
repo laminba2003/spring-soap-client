@@ -20,9 +20,9 @@ public class PasswordSecurityConfig {
     @Bean
     public XwsSecurityInterceptor securityInterceptor() {
         XwsSecurityInterceptor interceptor = new XwsSecurityInterceptor();
-        Map<String, String> securityConfig = (Map<String, String>) clientConfig.getSecurity().get("password");
+        Map<String, String> password = clientConfig.getPassword();
         DefaultResourceLoader loader = new DefaultResourceLoader();
-        interceptor.setPolicyConfiguration(loader.getResource(securityConfig.get("policy")));
+        interceptor.setPolicyConfiguration(loader.getResource(password.get("policy")));
         interceptor.setCallbackHandler(new SimplePasswordValidationCallbackHandler());
         return interceptor;
     }
