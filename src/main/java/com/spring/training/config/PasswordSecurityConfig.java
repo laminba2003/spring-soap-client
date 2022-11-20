@@ -1,5 +1,6 @@
 package com.spring.training.config;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -11,10 +12,13 @@ import java.util.Map;
 
 @Configuration
 @Profile("password")
+@AllArgsConstructor
 public class PasswordSecurityConfig {
 
+    final ClientConfig clientConfig;
+
     @Bean
-    public XwsSecurityInterceptor passwordSecurityInterceptor(ClientConfig clientConfig) {
+    public XwsSecurityInterceptor securityInterceptor() {
         XwsSecurityInterceptor interceptor = new XwsSecurityInterceptor();
         Map<String, String> securityConfig = (Map<String, String>) clientConfig.getSecurity().get("password");
         DefaultResourceLoader loader = new DefaultResourceLoader();

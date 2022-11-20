@@ -3,7 +3,6 @@ package com.spring.training.config;
 import com.spring.training.client.CountryClient;
 import com.spring.training.client.PersonClient;
 import com.spring.training.exception.SoapExceptionResolver;
-import lombok.AllArgsConstructor;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +13,6 @@ import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionReso
 import java.util.Properties;
 
 @Configuration
-@AllArgsConstructor
 public class ApplicationConfig {
 
     @Bean
@@ -23,9 +21,9 @@ public class ApplicationConfig {
         SoapFaultDefinition faultDefinition = new SoapFaultDefinition();
         faultDefinition.setFaultCode(SoapFaultDefinition.SERVER);
         exceptionResolver.setDefaultFault(faultDefinition);
-        Properties errorMappings = new Properties();
-        errorMappings.setProperty(Exception.class.getName(), SoapFaultDefinition.SERVER.toString());
-        exceptionResolver.setExceptionMappings(errorMappings);
+        Properties exceptionMappings = new Properties();
+        exceptionMappings.setProperty(Exception.class.getName(), SoapFaultDefinition.SERVER.toString());
+        exceptionResolver.setExceptionMappings(exceptionMappings);
         exceptionResolver.setOrder(1);
         return exceptionResolver;
     }

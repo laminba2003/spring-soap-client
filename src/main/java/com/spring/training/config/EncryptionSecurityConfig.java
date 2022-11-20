@@ -1,5 +1,7 @@
 package com.spring.training.config;
 
+import lombok.AllArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -8,15 +10,18 @@ import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
 import org.springframework.ws.soap.security.wss4j2.callback.KeyStoreCallbackHandler;
 import org.springframework.ws.soap.security.wss4j2.support.CryptoFactoryBean;
 
-import java.io.IOException;
 import java.util.Map;
 
 @Configuration
 @Profile("encrypt")
+@AllArgsConstructor
 public class EncryptionSecurityConfig {
 
+    final ClientConfig clientConfig;
+
     @Bean
-    public Wss4jSecurityInterceptor wss4jSecurityInterceptor(ClientConfig clientConfig) throws Exception {
+    @SneakyThrows
+    public Wss4jSecurityInterceptor securityInterceptor() {
         Wss4jSecurityInterceptor interceptor = new Wss4jSecurityInterceptor();
         Map<String, String> securityConfig = (Map<String, String>) clientConfig.getSecurity().get("certificate");
         interceptor.setSecurementActions("Signature Encrypt");
@@ -25,7 +30,7 @@ public class EncryptionSecurityConfig {
         interceptor.setSecurementPassword(securityConfig.get("password"));
         interceptor.setSecurementSignatureKeyIdentifier("DirectReference");
         interceptor.setSecurementEncryptionUser(securityConfig.get("alias"));
-        CryptoFactoryBean cryptoFactoryBean = cryptoFactoryBean(clientConfig);
+        CryptoFactoryBean cryptoFactoryBean = cryptoFactoryBean();
         interceptor.setSecurementSignatureCrypto(cryptoFactoryBean.getObject());
         interceptor.setValidationSignatureCrypto(cryptoFactoryBean.getObject());
         interceptor.setSecurementEncryptionCrypto(cryptoFactoryBean.getObject());
@@ -37,7 +42,8 @@ public class EncryptionSecurityConfig {
     }
 
     @Bean
-    public CryptoFactoryBean cryptoFactoryBean(ClientConfig clientConfig) throws IOException {
+    @SneakyThrows
+    public CryptoFactoryBean cryptoFactoryBean() {
         CryptoFactoryBean cryptoFactoryBean = new CryptoFactoryBean();
         Map<String, String> securityConfig = (Map<String, String>) clientConfig.getSecurity().get("certificate");
         DefaultResourceLoader loader = new DefaultResourceLoader();

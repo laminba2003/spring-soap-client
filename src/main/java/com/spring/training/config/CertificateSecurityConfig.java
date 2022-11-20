@@ -1,5 +1,6 @@
 package com.spring.training.config;
 
+import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -12,17 +13,20 @@ import java.util.Map;
 
 @Configuration
 @Profile("certificate")
+@AllArgsConstructor
 public class CertificateSecurityConfig {
 
+    final ClientConfig clientConfig;
+
     @Bean
-    public XwsSecurityInterceptor certificateSecurityInterceptor(ClientConfig clientConfig) {
+    public XwsSecurityInterceptor securityInterceptor() {
         XwsSecurityInterceptor interceptor = new XwsSecurityInterceptor();
         Map<String, String> securityConfig = (Map<String, String>) clientConfig.getSecurity().get("certificate");
         DefaultResourceLoader loader = new DefaultResourceLoader();
         interceptor.setPolicyConfiguration(loader.getResource(securityConfig.get("policy")));
         KeyStoreCallbackHandler handler = new KeyStoreCallbackHandler();
         handler.setDefaultAlias(securityConfig.get("alias"));
-        KeyStoreFactoryBean keyStoreFactoryBean = keyStoreFactoryBean(clientConfig);
+        KeyStoreFactoryBean keyStoreFactoryBean = keyStoreFactoryBean();
         handler.setTrustStore(keyStoreFactoryBean.getObject());
         handler.setKeyStore(keyStoreFactoryBean.getObject());
         handler.setPrivateKeyPassword(securityConfig.get("password"));
@@ -31,7 +35,7 @@ public class CertificateSecurityConfig {
     }
 
     @Bean
-    public KeyStoreFactoryBean keyStoreFactoryBean(ClientConfig clientConfig) {
+    public KeyStoreFactoryBean keyStoreFactoryBean() {
         Map<String, String> securityConfig = (Map<String, String>) clientConfig.getSecurity().get("certificate");
         DefaultResourceLoader loader = new DefaultResourceLoader();
         KeyStoreFactoryBean keyStoreFactoryBean = new KeyStoreFactoryBean();
