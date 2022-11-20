@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.ws.soap.client.SoapFaultClientException;
 
+import java.net.ConnectException;
 import java.time.LocalDateTime;
 
 @ControllerAdvice
@@ -24,6 +25,13 @@ public class APIExceptionHandler {
         APIException exception = new APIException("the input provided is invalid",
                 HttpStatus.BAD_REQUEST, LocalDateTime.now());
         return new ResponseEntity<>(exception, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ConnectException.class)
+    public ResponseEntity<APIException> handleConnectException(ConnectException e) {
+        APIException exception = new APIException(e.getMessage(),
+                HttpStatus.SERVICE_UNAVAILABLE, LocalDateTime.now());
+        return new ResponseEntity<>(exception, HttpStatus.SERVICE_UNAVAILABLE);
     }
 
 }
