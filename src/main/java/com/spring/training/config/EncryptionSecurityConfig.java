@@ -13,7 +13,7 @@ import org.springframework.ws.soap.security.wss4j2.support.CryptoFactoryBean;
 import java.util.Map;
 
 @Configuration
-@Profile("encrypt")
+@Profile("encryption")
 @AllArgsConstructor
 public class EncryptionSecurityConfig {
 

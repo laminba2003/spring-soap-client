@@ -114,7 +114,7 @@ mvn spring-boot:run -Dspring-boot.run.profiles=password
 - Signature
 
 ```
-mvn spring-boot:run -Dspring-boot.run.profiles=certificate
+mvn spring-boot:run -Dspring-boot.run.profiles=signature
 ```
 
 - Encryption 
