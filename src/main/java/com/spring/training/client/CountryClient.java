@@ -2,12 +2,14 @@ package com.spring.training.client;
 
 import com.spring.training.config.ClientConfig;
 import com.spring.training.model.*;
+import org.springframework.stereotype.Component;
 import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 
 import java.util.List;
 
 import static com.spring.training.client.SoapActions.*;
 
+@Component
 public class CountryClient extends AbstractWsClient {
 
     public CountryClient(ClientConfig clientConfig, ClientInterceptor[] interceptors) {

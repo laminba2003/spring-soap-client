@@ -1,12 +1,9 @@
 package com.spring.training.config;
 
-import com.spring.training.client.CountryClient;
-import com.spring.training.client.PersonClient;
 import com.spring.training.exception.SoapExceptionResolver;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.ws.client.support.interceptor.ClientInterceptor;
 import org.springframework.ws.soap.server.endpoint.SoapFaultDefinition;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
 
@@ -34,14 +31,5 @@ public class ApplicationConfig {
         return new ClientConfig();
     }
 
-    @Bean
-    public CountryClient countryClient(ClientConfig clientConfig, ClientInterceptor[] interceptors) {
-        return new CountryClient(clientConfig, interceptors);
-    }
-
-    @Bean
-    public PersonClient personClient(ClientConfig clientConfig, ClientInterceptor[] interceptors) {
-        return new PersonClient(clientConfig, interceptors);
-    }
 
 }
