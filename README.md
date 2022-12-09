@@ -122,3 +122,18 @@ mvn spring-boot:run -Dspring-boot.run.profiles=signature
 ```
 mvn spring-boot:run -Dspring-boot.run.profiles=encryption
 ```
+
+### REST endpoints
+
+| HTTP verb | Resource  | Description
+|----|---|---|
+|  GET  | /persons  | retrieve list and information of persons  
+|  GET |  /persons/{id} | retrieve information of a person specified by {id}
+|  POST | /persons  | create a new person with payload  
+|  PUT   |  /persons/{id} | update a person with payload   
+|  DELETE   | /persons/{id}  |  delete a person specified by {id} 
+|  GET  | /countries  | retrieve list and information of countries  
+|  GET |  /countries/{name} | retrieve information of a country specified by {name} 
+|  POST | /countries  | create a new country with payload  
+|  PUT   |  /countries/{name} | update a country with payload   
+|  DELETE   | /countries/{name}  |  delete a country specified by {name} 
